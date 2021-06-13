@@ -1,6 +1,8 @@
-package ennate.io.Controller;
+package ennate.io.controller;
 
 import ennate.io.entity.Employee;
+import ennate.io.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,19 +12,17 @@ import java.util.List;
 @RequestMapping(value = "employees")
 public class EmployeeController {
 
+    @Autowired
+    private EmployeeService service;
+
     @RequestMapping(method = RequestMethod.GET)
     public List<Employee> findAll() {
-        List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee("Vaishnavi", "vm@gmail.com", 80000));
-        employees.add(new Employee("Ajith", "aj@gmail.com", 90000));
-        employees.add(new Employee("Vaish", "vm1@gmail.com", 50000));
-        return employees;
+        return service.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "{id}")
     public Employee findOne(@PathVariable("id") String empId) {
-        Employee employee = new Employee("Vaish", "vm1@gmail.com", 50000);
-        return employee;
+        return service.findOne(empId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
