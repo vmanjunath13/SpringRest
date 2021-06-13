@@ -9,6 +9,10 @@ public class Employee {
     private String email;
     private int salary;
 
+    public Employee() {
+        this.id = UUID.randomUUID().toString();
+    }
+
     public Employee(String name, String email, int salary) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
